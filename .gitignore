@@ -16,7 +16,7 @@ __pycache__/
 *.swp
 *.swo
 
-# Model files (optional - only if large)
+# Model files
 models/*.pt
 *.pt
 
