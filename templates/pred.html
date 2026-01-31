@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - Brain Tumor Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">
+                        <img src="{{ url_for('static', filename='images/brain_logo.png') }}" alt="Brain Logo"/>
+                        <p>Brain Tumor Detection</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="cardpred">
+                <div class="result-container">
+                    <h1 class="card-title">Analysis Results</h1>
+                    
+                    <img src="{{ url_for('static', filename='images/' + f_name) }}" alt="Uploaded MRI" class="result-image"/>
+                    
+                    <p class="result-label">Classification Result</p>
+                    
+                    {% set pred_lower = pred.lower() %}
+                    <div class="result-text {% if pred_lower == 'meningioma' %}meningioma{% elif pred_lower == 'glioma' %}glioma{% elif pred_lower == 'pituitary' %}pituitary{% elif pred_lower == 'none' %}none{% endif %}">
+                        {% if pred_lower == 'none' %}
+                            No Abnormality Detected
+                        {% elif pred_lower == 'meningioma' %}
+                            Meningioma
+                        {% elif pred_lower == 'glioma' %}
+                            Glioma
+                        {% elif pred_lower == 'pituitary' %}
+                            Pituitary Tumor
+                        {% else %}
+                            {{ pred }}
+                        {% endif %}
+                    </div>
+
+                    <div class="disclaimer">
+                        <strong>Medical Disclaimer:</strong> This analysis is for research and educational purposes only. The results should not be used for clinical diagnosis or medical decision-making. Consult a qualified medical professional for proper diagnosis and treatment.
+                    </div>
+
+                    <button type="button" class="go-home-btn" onclick="window.location.href='/'">
+                        Analyze Another Image
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Brain Tumor Detection System. All rights reserved.</p>
+        <p>Dataset: <a href="https://figshare.com/articles/brain_tumor_dataset/1512427">Brain Tumor Dataset - Figshare</a></p>
+    </footer>
+</body>
+</html>
